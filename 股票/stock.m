@@ -41,16 +41,12 @@ bar(Pclose) % 作为对照图形
 %% 股票价值的评估
 
 p = polyfit(DateNum, Pclose, 1); % 多项式拟合
-% 分号作用为不在命令窗口显示执行结果
+% polyfit()返回阶数为 n 的多项式 p(x) 的系数，p 中的系数按降幂排列
 P1 = polyval(p,DateNum); % 得到多项式模型的结果
 figure
-plot(DateNum,P1,DateNum,Pclose,'*g'); % 模型与原始数据的对照
-value = p(1) % 将斜率赋值给value，作为股票的价值。
-
- 
+plot(DateNum,P1,DateNum,Pclose,'*g'); % 模型与原始数据的对照, '*g'表示绿色的*
+value = p(1) % 将斜率赋值给value，作为股票的价值。p(1)最高项的次数
 
 %% 股票风险的评估
-
 MaxDD = maxdrawdown(Pclose); % 计算最大回撤
-
 risk = MaxDD  % 将最大回撤赋值给risk，作为股票的风险
